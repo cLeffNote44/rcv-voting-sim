@@ -1,0 +1,23 @@
+[
+  { "id": "c01", "name": "Avery Brooks", "shortLabel": "Brooks", "bio": "Community planner with a background in urban design. Focuses on parks and safe streets." },
+  { "id": "c02", "name": "Casey Morgan", "shortLabel": "Morgan", "bio": "Small business owner who mentors youth apprentices. Interested in local entrepreneurship." },
+  { "id": "c03", "name": "Jordan Lee", "shortLabel": "Lee", "bio": "Hydrologist experienced in water management. Works on drought resilience and river health." },
+  { "id": "c04", "name": "Riley Patel", "shortLabel": "Patel", "bio": "Neighborhood volunteer and librarian. Advocates for accessible city services." },
+  { "id": "c05", "name": "Skylar Nguyen", "shortLabel": "Nguyen", "bio": "Renewable energy engineer focused on grid reliability and affordability." },
+  { "id": "c06", "name": "Quinn Alvarez", "shortLabel": "Alvarez", "bio": "Former teacher and coach. Interested in recreation programs and safe routes to schools." },
+  { "id": "c07", "name": "Taylor Kim", "shortLabel": "Kim", "bio": "Transportation analyst working on transit reliability and traffic safety." },
+  { "id": "c08", "name": "Dakota Chen", "shortLabel": "Chen", "bio": "Accountant with nonprofit finance experience. Emphasizes transparent budgeting." },
+  { "id": "c09", "name": "Alex Martinez", "shortLabel": "Martinez", "bio": "Civil engineer with stormwater expertise. Focus on infrastructure maintenance." },
+  { "id": "c10", "name": "Jamie Singh", "shortLabel": "Singh", "bio": "Public health coordinator. Interested in walkability and air quality." },
+  { "id": "c11", "name": "Parker Davis", "shortLabel": "Davis", "bio": "Software project manager. Works on digital access and city IT modernization." },
+  { "id": "c12", "name": "Cameron Ortiz", "shortLabel": "Ortiz", "bio": "Wildlife biologist. Focused on habitat conservation and balanced growth." },
+  { "id": "c13", "name": "Emerson Reid", "shortLabel": "Reid", "bio": "Workforce development specialist. Supports apprenticeships and training." },
+  { "id": "c14", "name": "Rowan Shah", "shortLabel": "Shah", "bio": "Water conservation educator. Interested in efficient irrigation and xeriscape." },
+  { "id": "c15", "name": "Harper Flores", "shortLabel": "Flores", "bio": "Parks volunteer coordinator. Focus on trails, tree canopy, and urban forestry." },
+  { "id": "c16", "name": "Micah Rivera", "shortLabel": "Rivera", "bio": "Small-scale farmer and local food organizer. Works on food resilience." },
+  { "id": "c17", "name": "Sydney Park", "shortLabel": "Park", "bio": "Emergency preparedness planner. Interested in wildfire and flood readiness." },
+  { "id": "c18", "name": "Blake Thompson", "shortLabel": "Thompson", "bio": "Housing policy analyst. Focus on attainable housing and neighborhood stability." },
+  { "id": "c19", "name": "Jordan Carter", "shortLabel": "Carter", "bio": "Public works crew lead. Emphasizes basics: streets, snow, and signals." },
+  { "id": "c20", "name": "Kai Robinson", "shortLabel": "Robinson", "bio": "Higher-ed advisor. Interested in pathways from school to career." }
+]
+

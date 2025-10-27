@@ -1,0 +1,65 @@
+import pool from '../data/candidates.json';
+import { Candidate, Ballot } from '../lib/types';
+import { parseParams, setParams } from '../lib/utils';
+import { chooseCandidates, generatePositions, generateElectorate } from '../lib/simulate';
+import { renderBallot } from '../components/Ballot';
+import { renderRCVisChart, RCVisAPI } from '../components/RCVisChart';
+import { runRCV } from '../lib/rcv';
+import { renderRoundControls } from '../components/RoundControls';
+import { renderBallotSummary } from '../components/BallotSummary';
+import { renderRulesModal } from '../components/RulesModal';
+
+export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
+  root.innerHTML = '';
+  const { seed, n } = parseParams();
+  const poolData = pool as Candidate[];
+  const selected = chooseCandidates(poolData, seed);
+  const pos = generatePositions(selected, seed);
+
+  const ballotArea = document.createElement('div');
+  const controlsArea = document.createElement('div');
+  const chartArea = document.createElement('div');
+  chartArea.className = 'chart-area';
+  const summaryArea = document.createElement('div');
+
+  root.append(ballotArea, controlsArea, chartArea, summaryArea);
+
+  renderBallot(ballotArea, selected, (userBallot: Ballot) => {
+    const synth = generateElectorate(n, selected, pos, seed);
+    const ballots = synth.concat([userBallot]);
+    const candidateIds = selected.map(c => c.id);
+    const result = runRCV(ballots, candidateIds, seed, userBallot.id);
+
+    const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
+    renderBallotSummary(summaryArea, result, selected, result.userPath);
+    renderRoundControls(controlsArea, result, (round) => api.focusRound(round), () => {
+      renderSim(root, rerenderRoute);
+    });
+
+    // Rules info button
+    const rulesBtn = document.createElement('button');
+    rulesBtn.textContent = '📖 How RCV Works';
+    rulesBtn.className = 'rules-button';
+    rulesBtn.addEventListener('click', () => {
+      const modal = renderRulesModal(() => {
+        document.body.removeChild(modal);
+      });
+      document.body.appendChild(modal);
+    });
+    controlsArea.append(rulesBtn);
+
+    const tieEvents = result.rounds.filter(r => r.tieBreak).map(r => {
+      if (!r.tieBreak) return '';
+      const c = r.tieBreak;
+      return 'Round ' + (r.roundIndex + 1) + ' tie for elimination between ' + c.tied.join(', ') + '; chosen: ' + c.chosen + '.';
+    }).filter(Boolean);
+
+    if (tieEvents.length !== 0) {
+      const tieInfo = document.createElement('div');
+      tieInfo.className = 'tie-info';
+      tieInfo.textContent = tieEvents.join(' ');
+      controlsArea.append(tieInfo);
+    }
+  });
+}
+
