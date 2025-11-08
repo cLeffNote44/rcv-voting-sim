@@ -99,6 +99,34 @@ button:focus {
   margin: 6px 0 12px 0;
 }
 
+.error-message {
+  background: #fff5f5;
+  border: 2px solid var(--danger);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  color: var(--text);
+}
+
+.error-message h3 {
+  color: var(--danger);
+  margin: 0 0 12px 0;
+}
+
+.error-message p {
+  margin: 8px 0;
+  color: var(--text);
+}
+
+.error-message small {
+  color: var(--muted);
+  font-family: monospace;
+}
+
+.error-message button {
+  margin-top: 12px;
+}
+
 /* Modal */
 .modal-overlay {
   position: fixed;
@@ -530,9 +558,10 @@ button:focus {
   padding: 40px 20px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: linear-gradient( to bottom right, rgba(255,255,255,0.92), rgba(255,255,255,0.86) ), url('https://shirleyforfoco.com/wp-content/uploads/2025/06/dji_0316.jpg');
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   background-size: cover;
   background-position: center;
+  color: #fff;
   margin-bottom: 20px;
   min-height: 300px;
   display: flex;
@@ -546,6 +575,9 @@ button:focus {
   color: var(--muted);
   margin-bottom: 6px;
 }
+.hero .kicker {
+  color: rgba(255, 255, 255, 0.9);
+}
 .hero-title {
   font-size: clamp(1.6rem, 3.6vw, 2.4rem);
   line-height: 1.15;
@@ -554,10 +586,16 @@ button:focus {
 .hero-title .accent {
   color: var(--accent);
 }
+.hero .hero-title .accent {
+  color: #ffd700;
+}
 .hero-tagline {
   font-size: 1.05rem;
   color: var(--muted);
   margin-bottom: 12px;
+}
+.hero .hero-tagline {
+  color: rgba(255, 255, 255, 0.95);
 }
 .cta-group { display: flex; gap: 10px; flex-wrap: wrap; }
 

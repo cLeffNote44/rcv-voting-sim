@@ -47,6 +47,17 @@ export function runRCV(
   userBallotId?: string,
   rules: RCVRules = DEFAULT_RULES,
 ): CountResult {
+  // Input validation
+  if (!ballots || ballots.length === 0) {
+    throw new Error('No ballots provided for RCV count');
+  }
+  if (!candidateIds || candidateIds.length === 0) {
+    throw new Error('No candidates provided for RCV count');
+  }
+  if (!seed) {
+    throw new Error('Seed required for RCV count');
+  }
+
   const rng = makeRng(seed + '-rcv');
   const rounds: RoundResult[] = [];
   const continuing = new Set<string>(candidateIds);
@@ -143,14 +154,10 @@ export function runRCV(
         }
       }
       if (!resolved) {
-        if (rules.tieBreaker === 'seeded') {
-          const idx = Math.floor(rng() * lows.length);
-          eliminated = lows[idx];
-        } else {
-          // lot (true random)
-          const idx = Math.floor(Math.random() * lows.length);
-          eliminated = lows[idx];
-        }
+        // Use seeded RNG for all tie-breaking to ensure reproducible simulations
+        // Both 'seeded' and 'lot' modes now use the seeded random number generator
+        const idx = Math.floor(rng() * lows.length);
+        eliminated = lows[idx];
       }
       resultBase.tieBreak = { roundIndex, kind: 'elimination', tied: lows, chosen: eliminated };
     }

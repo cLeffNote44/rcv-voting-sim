@@ -1,6 +1,6 @@
 import pool from '../data/candidates.json';
 import { Candidate, Ballot } from '../lib/types';
-import { parseParams, setParams } from '../lib/utils';
+import { parseParams } from '../lib/utils';
 import { chooseCandidates, generatePositions, generateElectorate } from '../lib/simulate';
 import { renderBallot } from '../components/Ballot';
 import { renderRCVisChart, RCVisAPI } from '../components/RCVisChart';
@@ -25,16 +25,31 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
   root.append(ballotArea, controlsArea, chartArea, summaryArea);
 
   renderBallot(ballotArea, selected, (userBallot: Ballot) => {
-    const synth = generateElectorate(n, selected, pos, seed);
-    const ballots = synth.concat([userBallot]);
-    const candidateIds = selected.map(c => c.id);
-    const result = runRCV(ballots, candidateIds, seed, userBallot.id);
+    try {
+      const synth = generateElectorate(n, selected, pos, seed);
+      const ballots = synth.concat([userBallot]);
+      const candidateIds = selected.map(c => c.id);
+      const result = runRCV(ballots, candidateIds, seed, userBallot.id);
 
-    const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
-    renderBallotSummary(summaryArea, result, selected, result.userPath);
-    renderRoundControls(controlsArea, result, (round) => api.focusRound(round), () => {
-      renderSim(root, rerenderRoute);
-    });
+      const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
+      renderBallotSummary(summaryArea, result, selected, result.userPath);
+      renderRoundControls(controlsArea, result, (round) => api.focusRound(round), () => {
+        renderSim(root, rerenderRoute);
+      });
+    } catch (error) {
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'error-message';
+      errorMsg.innerHTML = `
+        <h3>⚠️ Simulation Error</h3>
+        <p>An error occurred while running the RCV simulation. Please try again.</p>
+        <p><small>${error instanceof Error ? error.message : 'Unknown error'}</small></p>
+        <button class="btn-primary" onclick="window.location.reload()">Reload Page</button>
+      `;
+      chartArea.innerHTML = '';
+      chartArea.appendChild(errorMsg);
+      console.error('RCV simulation error:', error);
+      return;
+    }
 
     // Rules info button
     const rulesBtn = document.createElement('button');
