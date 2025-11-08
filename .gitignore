@@ -11,6 +11,7 @@ coverage/
 # Production build
 dist/
 dist-ssr/
+rcv-sim-dist/
 build/
 *.local
 
