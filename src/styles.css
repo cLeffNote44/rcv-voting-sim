@@ -484,8 +484,23 @@ button.icon-button {
   background: #ffffff;
   box-shadow: 0 4px 16px rgba(191, 10, 48, 0.3);
 }
-.chart-area * {
+/* Dark text for non-SVG elements in chart area */
+.chart-area .chart-note,
+.chart-area .round-stats-header,
+.chart-area .round-stats-meta,
+.chart-area .round-stats-list,
+.chart-area .exhaustion-header,
+.chart-area .exhaustion-none,
+.chart-area .exhaustion-summary,
+.chart-area .breakdown-title,
+.chart-area .reason-text,
+.chart-area .tie-info,
+.chart-area .legend-item {
   color: #1a1a1a;
+}
+/* SVG text elements need fill instead of color */
+.chart-area svg text {
+  fill: #1a1a1a;
 }
 .chart-wrapper { width: 100%; }
 .charts-row {
