@@ -1,5 +1,18 @@
 # Deployment Guide for RCV Voting Simulator
 
+> **⚠️ DEPRECATED**: This file is outdated. Please use **[DEPLOY.md](DEPLOY.md)** for comprehensive deployment instructions.
+>
+> DEPLOY.md includes:
+> - 5 deployment platforms (vs 4 here)
+> - Pre-deployment checklist
+> - Platform-specific environment variable setup
+> - Post-deployment verification steps
+> - Security considerations
+> - Analytics integration
+> - Troubleshooting guide
+
+---
+
 ## Prerequisites
 - Node.js and npm installed
 - Built project (`npm run build`)

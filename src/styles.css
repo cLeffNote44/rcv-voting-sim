@@ -1,15 +1,27 @@
-/* Basic reset and theming */
+/* Basic reset and theming - Colorado Dark Theme */
 :root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #5a5a5a;
-  --accent: #0b68b7;
-  --accent-2: #125f2f;
-  --warn: #b75e0b;
-  --danger: #b70b0b;
-  --border: #d9d9d9;
-  --exhausted: #777777;
-  --focus: #1f7aeb;
+  /* Colorado Flag Colors */
+  --colorado-blue: #002868;
+  --colorado-red: #BF0A30;
+  --colorado-gold: #FFD700;
+  --colorado-white: #FFFFFF;
+
+  /* Colorado-inspired dark theme */
+  --bg: #0a1929;
+  --text: #e8edf4;
+  --muted: #94a3b8;
+  --accent: var(--colorado-red);
+  --accent-2: var(--colorado-gold);
+  --warn: #fb923c;
+  --danger: #ef4444;
+  --border: #1e4976;
+  --exhausted: #64748b;
+  --focus: var(--colorado-gold);
+
+  /* Card backgrounds with Colorado colors */
+  --bg-elevated: #132f4c;
+  --bg-card: #1a3a52;
+  --card-border: #2563eb;
 }
 
 /* Colorblind-friendly scheme (deuteranopia/protanopia safe) */
@@ -60,29 +72,42 @@ p { margin: 0 0 12px 0; color: var(--muted); }
 button {
   appearance: none;
   border: 1px solid var(--border);
-  background: #fff;
+  background: var(--bg-elevated);
   color: var(--text);
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 button.primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, #8B0A1E 100%);
   color: #fff;
   border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(191, 10, 48, 0.3);
+}
+button.primary:hover {
+  box-shadow: 0 6px 16px rgba(191, 10, 48, 0.4);
+  transform: translateY(-1px);
 }
 button.secondary {
-  background: var(--bg);
+  background: var(--bg-elevated);
   color: var(--text);
   border-color: var(--border);
 }
 button.secondary:hover {
-  background: #f7f7f7;
+  background: var(--bg-card);
+  border-color: var(--accent-2);
 }
 button.success {
-  background: var(--accent-2);
-  color: #fff;
+  background: linear-gradient(135deg, var(--accent-2) 0%, #DAA520 100%);
+  color: #000;
+  font-weight: 600;
   border-color: var(--accent-2);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+button.success:hover {
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
+  transform: translateY(-1px);
 }
 button:hover:not(:disabled) {
   filter: brightness(0.95);
@@ -108,17 +133,19 @@ button.icon-button {
   color: var(--muted);
 }
 
-/* Toolbar */
+/* Toolbar with Colorado colors */
 .toolbar {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   margin: 16px 0;
   padding: 12px;
-  background: #f9f9f9;
-  border: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+  border: 2px solid var(--border);
+  border-left: 4px solid var(--accent-2);
   border-radius: 8px;
   align-items: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 [data-color-scheme="high-contrast"] .toolbar {
@@ -167,11 +194,13 @@ button.icon-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: var(--accent-2);
-  color: #fff;
+  background: linear-gradient(135deg, var(--accent-2) 0%, #DAA520 100%);
+  color: #000;
+  font-weight: 600;
   padding: 12px 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border: 2px solid var(--accent-2);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
   animation: slideIn 0.3s ease-out;
   z-index: 1000;
 }
@@ -228,21 +257,26 @@ button.icon-button {
   font-weight: 500;
 }
 
-/* Ballot grid */
+/* Ballot grid with Colorado styling - white background for readability */
 .ballot-grid {
-  border: 1px solid var(--border);
+  border: 2px solid var(--accent-2);
+  border-top: 3px solid var(--accent-2);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
 }
 .ballot-row {
   display: grid;
   grid-template-columns: minmax(180px, 1fr) repeat(4, minmax(90px, 1fr));
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e5e7eb;
 }
 .ballot-row.header {
-  background: #f7f7f7;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   font-weight: 600;
+  border-bottom: 2px solid var(--accent-2);
+  color: #1a1a1a;
 }
 .cell {
   padding: 8px;
@@ -254,8 +288,8 @@ button.icon-button {
   flex-direction: column;
   align-items: flex-start;
 }
-.cand-name { font-weight: 600; color: var(--text); }
-.cand-bio { color: var(--muted); font-size: 0.9rem; }
+.cand-name { font-weight: 600; color: #1a1a1a; }
+.cand-bio { color: #5a5a5a; font-size: 0.9rem; }
 
 .checkbox {
   width: 100%;
@@ -275,12 +309,14 @@ button.icon-button {
 }
 
 .error-message {
-  background: #fff5f5;
+  background: var(--bg-card);
   border: 2px solid var(--danger);
+  border-left: 4px solid var(--danger);
   border-radius: 8px;
   padding: 20px;
   margin: 20px 0;
   color: var(--text);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
 }
 
 .error-message h3 {
@@ -313,11 +349,12 @@ button.icon-button {
 }
 .modal {
   width: min(520px, 92vw);
-  background: #fff;
+  background: var(--bg-elevated);
   border-radius: 10px;
   padding: 16px;
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 50px rgba(0,0,0,0.25);
+  border: 2px solid var(--border);
+  border-top: 3px solid var(--accent-2);
+  box-shadow: 0 10px 50px rgba(0,0,0,0.5);
 }
 .modal .msg-list {
   margin: 8px 0;
@@ -348,8 +385,8 @@ button.icon-button {
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  background: #f8f8f8;
+  border-bottom: 2px solid var(--accent-2);
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
   border-radius: 10px 10px 0 0;
   position: sticky;
   top: 0;
@@ -416,10 +453,11 @@ button.icon-button {
   color: var(--text);
 }
 .rules-note {
-  background: #f0f7ff;
+  background: var(--bg-card);
   padding: 12px;
   border-radius: 6px;
-  border-left: 3px solid var(--accent);
+  border-left: 4px solid var(--accent-2);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
 }
 .rules-note p {
   margin: 0;
@@ -435,13 +473,19 @@ button.icon-button {
   filter: brightness(1.1);
 }
 
-/* Chart and controls */
+/* Chart and controls with Colorado theming - white background for clarity */
 .chart-area {
   margin-top: 16px;
-  border: 1px solid var(--border);
+  border: 2px solid var(--accent);
+  border-top: 3px solid var(--accent);
   border-radius: 8px;
-  padding: 8px;
+  padding: 12px;
   overflow-x: auto;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(191, 10, 48, 0.3);
+}
+.chart-area * {
+  color: #1a1a1a;
 }
 .chart-wrapper { width: 100%; }
 .charts-row {
@@ -454,7 +498,7 @@ button.icon-button {
 .sankey-container { flex: 1 1 auto; min-width: 600px; }
 .bar-chart-container {
   flex: 0 0 auto;
-  border-left: 1px solid var(--border);
+  border-left: 1px solid #e5e7eb;
   padding-left: 20px;
 }
 .legend {
@@ -464,34 +508,37 @@ button.icon-button {
   flex-wrap: wrap;
   margin: 8px 0;
 }
-.legend-item { display: inline-flex; gap: 6px; align-items: center; font-size: 0.95rem; }
+.legend-item { display: inline-flex; gap: 6px; align-items: center; font-size: 0.95rem; color: #1a1a1a; }
 .legend-item .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,0.15); }
 .round-stats {
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed #e5e7eb;
   margin-top: 8px;
   padding-top: 8px;
 }
-.round-stats-header { font-weight: 600; margin-bottom: 4px; }
-.round-stats-meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 4px; }
-.round-stats-list { margin: 0; padding-left: 18px; }
+.round-stats-header { font-weight: 600; margin-bottom: 4px; color: #1a1a1a; }
+.round-stats-meta { color: #5a5a5a; font-size: 0.95rem; margin-bottom: 4px; }
+.round-stats-list { margin: 0; padding-left: 18px; color: #1a1a1a; }
 
 /* Exhaustion Analysis */
 .exhaustion-analysis {
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed #e5e7eb;
   margin-top: 12px;
   padding-top: 12px;
 }
-.exhaustion-header { font-weight: 600; margin-bottom: 8px; }
-.exhaustion-none { color: var(--muted); font-size: 0.95rem; }
+.exhaustion-header { font-weight: 600; margin-bottom: 8px; color: #1a1a1a; }
+.exhaustion-none { color: #5a5a5a; font-size: 0.95rem; }
 .exhaustion-summary {
   background: #f8f9fa;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 6px;
+  border-left: 3px solid var(--accent);
   margin-bottom: 12px;
   font-size: 0.95rem;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(191, 10, 48, 0.2);
 }
 .exhaustion-breakdown { margin-top: 12px; }
-.breakdown-title { font-weight: 500; margin-bottom: 8px; font-size: 0.95rem; }
+.breakdown-title { font-weight: 500; margin-bottom: 8px; font-size: 0.95rem; color: #1a1a1a; }
 .exhaustion-reason {
   margin-bottom: 12px;
   position: relative;
@@ -508,18 +555,18 @@ button.icon-button {
   margin-top: 4px;
   font-size: 0.9rem;
 }
-.reason-text { color: var(--text); }
-.reason-count { color: var(--muted); font-weight: 500; }
+.reason-text { color: #1a1a1a; }
+.reason-count { color: #5a5a5a; font-weight: 500; }
 .round-controls {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   margin: 8px 0;
 }
-.chart-note { color: var(--muted); font-size: 0.9rem; margin: 4px 0 8px 0; }
+.chart-note { color: #5a5a5a; font-size: 0.9rem; margin: 4px 0 8px 0; }
 .tie-info {
   margin-top: 8px;
-  color: var(--muted);
+  color: #5a5a5a;
   font-size: 0.95rem;
 }
 
@@ -561,7 +608,7 @@ button.icon-button {
   }
   .bar-chart-container {
     border-left: none;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid #e5e7eb;
     padding-left: 0;
     padding-top: 16px;
     width: 100%;
@@ -710,23 +757,40 @@ button.icon-button {
   }
 }
 
-/* Top nav */
+/* Top nav with Colorado theme */
 .topnav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-bottom: 3px solid var(--accent-2);
   border-radius: 10px;
-  background: #fff;
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
   margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
-.topnav .brand { font-weight: 700; color: var(--text); text-decoration: none; }
+.topnav .brand {
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
 .topnav .links { display: flex; gap: 10px; align-items: center; }
-.topnav a { color: var(--text); text-decoration: none; padding: 6px 10px; border-radius: 9999px; }
-.topnav a:hover { background: #f6f6f6; }
-.topnav a.start { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
-.topnav a.start:hover { filter: brightness(0.95); }
+.topnav a { color: var(--text); text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: all 0.2s ease; }
+.topnav a:hover { background: var(--bg-card); border: 1px solid var(--accent-2); }
+.topnav a.start {
+  background: linear-gradient(135deg, var(--accent) 0%, #8B0A1E 100%);
+  color: #fff;
+  border: 1px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(191, 10, 48, 0.3);
+}
+.topnav a.start:hover {
+  box-shadow: 0 4px 12px rgba(191, 10, 48, 0.4);
+  transform: translateY(-1px);
+}
 
 /* Landing page enhancements */
 .hero {
@@ -781,13 +845,26 @@ button.icon-button {
   margin: 16px 0 8px 0;
 }
 .card {
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
+  border-left: 4px solid var(--accent);
   border-radius: 10px;
-  padding: 14px;
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  padding: 16px;
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 0 0 1px rgba(191, 10, 48, 0.1);
+  transition: all 0.3s ease;
 }
-.card h3, .card h2 { margin-top: 0; }
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 0 2px rgba(255, 215, 0, 0.3);
+  border-left-color: var(--accent-2);
+}
+.card h3, .card h2 {
+  margin-top: 0;
+  background: linear-gradient(135deg, var(--colorado-gold) 0%, var(--colorado-red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .card p { margin: 6px 0 0 0; }
 
 .info-cards {
