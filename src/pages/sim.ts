@@ -9,6 +9,7 @@ import { renderRoundControls } from '../components/RoundControls';
 import { renderBallotSummary } from '../components/BallotSummary';
 import { renderRulesModal } from '../components/RulesModal';
 import { renderToolbar } from '../components/Toolbar';
+import { showLoadingSpinner } from '../components/LoadingSpinner';
 
 export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
   root.innerHTML = '';
@@ -27,11 +28,19 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
   root.append(ballotArea, toolbarArea, controlsArea, chartArea, summaryArea);
 
   renderBallot(ballotArea, selected, (userBallot: Ballot) => {
-    try {
-      const synth = generateElectorate(n, selected, pos, seed);
-      const ballots = synth.concat([userBallot]);
-      const candidateIds = selected.map(c => c.id);
-      const result = runRCV(ballots, candidateIds, seed, userBallot.id);
+    // Show loading spinner for large simulations
+    const hideSpinner = n > 10000 ? showLoadingSpinner(`Simulating ${n.toLocaleString()} voters...`) : null;
+
+    // Use setTimeout to allow spinner to render before heavy computation
+    setTimeout(() => {
+      try {
+        const synth = generateElectorate(n, selected, pos, seed);
+        const ballots = synth.concat([userBallot]);
+        const candidateIds = selected.map(c => c.id);
+        const result = runRCV(ballots, candidateIds, seed, userBallot.id);
+
+        // Hide spinner if it was shown
+        if (hideSpinner) hideSpinner();
 
       // Render toolbar with share, export, and theme controls
       renderToolbar(toolbarArea, result, selected, seed, n);
@@ -42,6 +51,9 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
         renderSim(root, rerenderRoute);
       });
     } catch (error) {
+      // Hide spinner on error
+      if (hideSpinner) hideSpinner();
+
       const errorMsg = document.createElement('div');
       errorMsg.className = 'error-message';
       errorMsg.innerHTML = `
@@ -80,6 +92,7 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
       tieInfo.textContent = tieEvents.join(' ');
       controlsArea.append(tieInfo);
     }
+    }, 10); // Small delay to let spinner render
   });
 }
 

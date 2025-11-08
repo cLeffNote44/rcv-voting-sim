@@ -1,8 +1,29 @@
-# Fort Collins RCV Voting Simulator
+# RCV Voting Simulator
 
-An interactive **Ranked Choice Voting (RCV)** simulator with real-time visualizations and educational features. Built to help voters, educators, and civic organizations understand how instant-runoff voting works.
+<div align="center">
 
-![RCV Simulator](https://img.shields.io/badge/voting-ranked_choice-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue) ![Vite](https://img.shields.io/badge/Vite-5.4-646CFF) ![License](https://img.shields.io/badge/license-MIT-green)
+**Interactive Ranked Choice Voting simulator with real-time visualizations and educational features**
+
+[![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF)](https://vitejs.dev/)
+[![Tests Passing](https://img.shields.io/badge/tests-6%2F6_passing-brightgreen)](#testing)
+
+[🚀 Live Demo](https://rcv-voting-sim.netlify.app) • [📖 Documentation](CLAUDE.md) • [🐛 Report Bug](https://github.com/yourusername/rcv-voting-sim/issues)
+
+</div>
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+![RCV Simulator Demo](https://via.placeholder.com/800x450/667eea/ffffff?text=Interactive+Ballot+Entry+%7C+Real-Time+Visualization+%7C+Data+Export)
+
+*Interactive ranked choice voting with Sankey diagrams, ballot tracking, and instant results*
+
+</div>
 
 ## Features
 
