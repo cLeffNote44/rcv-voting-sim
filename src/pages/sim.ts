@@ -42,56 +42,55 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
         // Hide spinner if it was shown
         if (hideSpinner) hideSpinner();
 
-      // Render toolbar with share, export, and theme controls
-      renderToolbar(toolbarArea, result, selected, seed, n);
+        // Render toolbar with share, export, and theme controls
+        renderToolbar(toolbarArea, result, selected, seed, n);
 
-      const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
-      renderBallotSummary(summaryArea, result, selected, result.userPath);
-      renderRoundControls(controlsArea, result, (round) => api.focusRound(round), () => {
-        renderSim(root, rerenderRoute);
-      });
-    } catch (error) {
-      // Hide spinner on error
-      if (hideSpinner) hideSpinner();
+        const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
+        renderBallotSummary(summaryArea, result, selected, result.userPath);
+        renderRoundControls(controlsArea, result, (round) => api.focusRound(round), () => {
+          renderSim(root, rerenderRoute);
+        });
+        // Rules info button
+        const rulesBtn = document.createElement('button');
+        rulesBtn.textContent = '📖 How RCV Works';
+        rulesBtn.className = 'rules-button';
+        rulesBtn.addEventListener('click', () => {
+          const modal = renderRulesModal(() => {
+            document.body.removeChild(modal);
+          });
+          document.body.appendChild(modal);
+        });
+        controlsArea.append(rulesBtn);
 
-      const errorMsg = document.createElement('div');
-      errorMsg.className = 'error-message';
-      errorMsg.innerHTML = `
-        <h3>⚠️ Simulation Error</h3>
-        <p>An error occurred while running the RCV simulation. Please try again.</p>
-        <p><small>${error instanceof Error ? error.message : 'Unknown error'}</small></p>
-        <button class="btn-primary" onclick="window.location.reload()">Reload Page</button>
-      `;
-      chartArea.innerHTML = '';
-      chartArea.appendChild(errorMsg);
-      console.error('RCV simulation error:', error);
-      return;
-    }
+        const tieEvents = result.rounds.filter(r => r.tieBreak).map(r => {
+          if (!r.tieBreak) return '';
+          const c = r.tieBreak;
+          return 'Round ' + (r.roundIndex + 1) + ' tie for elimination between ' + c.tied.join(', ') + '; chosen: ' + c.chosen + '.';
+        }).filter(Boolean);
 
-    // Rules info button
-    const rulesBtn = document.createElement('button');
-    rulesBtn.textContent = '📖 How RCV Works';
-    rulesBtn.className = 'rules-button';
-    rulesBtn.addEventListener('click', () => {
-      const modal = renderRulesModal(() => {
-        document.body.removeChild(modal);
-      });
-      document.body.appendChild(modal);
-    });
-    controlsArea.append(rulesBtn);
+        if (tieEvents.length !== 0) {
+          const tieInfo = document.createElement('div');
+          tieInfo.className = 'tie-info';
+          tieInfo.textContent = tieEvents.join(' ');
+          controlsArea.append(tieInfo);
+        }
+      } catch (error) {
+        // Hide spinner on error
+        if (hideSpinner) hideSpinner();
 
-    const tieEvents = result.rounds.filter(r => r.tieBreak).map(r => {
-      if (!r.tieBreak) return '';
-      const c = r.tieBreak;
-      return 'Round ' + (r.roundIndex + 1) + ' tie for elimination between ' + c.tied.join(', ') + '; chosen: ' + c.chosen + '.';
-    }).filter(Boolean);
-
-    if (tieEvents.length !== 0) {
-      const tieInfo = document.createElement('div');
-      tieInfo.className = 'tie-info';
-      tieInfo.textContent = tieEvents.join(' ');
-      controlsArea.append(tieInfo);
-    }
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        errorMsg.innerHTML = `
+          <h3>⚠️ Simulation Error</h3>
+          <p>An error occurred while running the RCV simulation. Please try again.</p>
+          <p><small>${error instanceof Error ? error.message : 'Unknown error'}</small></p>
+          <button class="btn-primary" onclick="window.location.reload()">Reload Page</button>
+        `;
+        chartArea.innerHTML = '';
+        chartArea.appendChild(errorMsg);
+        console.error('RCV simulation error:', error);
+        return;
+      }
     }, 10); // Small delay to let spinner render
   });
 }
