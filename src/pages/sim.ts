@@ -1,6 +1,6 @@
 import pool from '../data/candidates.json';
 import { Candidate, Ballot } from '../lib/types';
-import { parseParams, setParams } from '../lib/utils';
+import { parseParams } from '../lib/utils';
 import { chooseCandidates, generatePositions, generateElectorate } from '../lib/simulate';
 import { renderBallot } from '../components/Ballot';
 import { renderRCVisChart, RCVisAPI } from '../components/RCVisChart';
@@ -8,6 +8,8 @@ import { runRCV } from '../lib/rcv';
 import { renderRoundControls } from '../components/RoundControls';
 import { renderBallotSummary } from '../components/BallotSummary';
 import { renderRulesModal } from '../components/RulesModal';
+import { renderToolbar } from '../components/Toolbar';
+import { showLoadingSpinner } from '../components/LoadingSpinner';
 
 export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
   root.innerHTML = '';
@@ -17,24 +19,54 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
   const pos = generatePositions(selected, seed);
 
   const ballotArea = document.createElement('div');
+  const toolbarArea = document.createElement('div');
   const controlsArea = document.createElement('div');
   const chartArea = document.createElement('div');
   chartArea.className = 'chart-area';
   const summaryArea = document.createElement('div');
 
-  root.append(ballotArea, controlsArea, chartArea, summaryArea);
+  root.append(ballotArea, toolbarArea, controlsArea, chartArea, summaryArea);
 
   renderBallot(ballotArea, selected, (userBallot: Ballot) => {
-    const synth = generateElectorate(n, selected, pos, seed);
-    const ballots = synth.concat([userBallot]);
-    const candidateIds = selected.map(c => c.id);
-    const result = runRCV(ballots, candidateIds, seed, userBallot.id);
+    // Show loading spinner for large simulations
+    const hideSpinner = n > 10000 ? showLoadingSpinner(`Simulating ${n.toLocaleString()} voters...`) : null;
 
-    const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
-    renderBallotSummary(summaryArea, result, selected, result.userPath);
-    renderRoundControls(controlsArea, result, (round) => api.focusRound(round), () => {
-      renderSim(root, rerenderRoute);
-    });
+    // Use setTimeout to allow spinner to render before heavy computation
+    setTimeout(() => {
+      try {
+        const synth = generateElectorate(n, selected, pos, seed);
+        const ballots = synth.concat([userBallot]);
+        const candidateIds = selected.map(c => c.id);
+        const result = runRCV(ballots, candidateIds, seed, userBallot.id);
+
+        // Hide spinner if it was shown
+        if (hideSpinner) hideSpinner();
+
+      // Render toolbar with share, export, and theme controls
+      renderToolbar(toolbarArea, result, selected, seed, n);
+
+      const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
+      renderBallotSummary(summaryArea, result, selected, result.userPath);
+      renderRoundControls(controlsArea, result, (round) => api.focusRound(round), () => {
+        renderSim(root, rerenderRoute);
+      });
+    } catch (error) {
+      // Hide spinner on error
+      if (hideSpinner) hideSpinner();
+
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'error-message';
+      errorMsg.innerHTML = `
+        <h3>⚠️ Simulation Error</h3>
+        <p>An error occurred while running the RCV simulation. Please try again.</p>
+        <p><small>${error instanceof Error ? error.message : 'Unknown error'}</small></p>
+        <button class="btn-primary" onclick="window.location.reload()">Reload Page</button>
+      `;
+      chartArea.innerHTML = '';
+      chartArea.appendChild(errorMsg);
+      console.error('RCV simulation error:', error);
+      return;
+    }
 
     // Rules info button
     const rulesBtn = document.createElement('button');
@@ -60,6 +92,7 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
       tieInfo.textContent = tieEvents.join(' ');
       controlsArea.append(tieInfo);
     }
+    }, 10); // Small delay to let spinner render
   });
 }
 

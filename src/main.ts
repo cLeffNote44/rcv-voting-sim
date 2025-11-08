@@ -2,6 +2,10 @@ import './styles.css';
 import './brand.css';
 import { renderLanding } from './pages/landing';
 import { renderSim } from './pages/sim';
+import { initColorScheme } from './lib/theme';
+
+// Initialize color scheme from localStorage
+initColorScheme();
 
 function route() {
   const app = document.querySelector('#app') as HTMLElement;

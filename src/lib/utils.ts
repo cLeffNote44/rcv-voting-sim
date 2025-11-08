@@ -64,40 +64,6 @@ export function parseParams(defaultSeed?: string): { seed: string; n: number } {
   return { seed, n };
 }
 
-export function setParams(params: { seed?: string; n?: number }): void {
-  if (!canUseHistory()) return;
-  try {
-    const url = new URL(window.location.href);
-    const sp = url.searchParams;
-    if (params.seed) sp.set('seed', params.seed);
-    if (params.n) sp.set('n', String(params.n));
-    url.search = sp.toString();
-    window.history.replaceState(null, '', url.toString());
-  } catch {
-    // Ignore if URL manipulation is not supported
-  }
-}
-
-export async function copyLinkToClipboard(): Promise<void> {
-  const text = window.location.href;
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-    await navigator.clipboard.writeText(text);
-    return;
-  }
-  // Fallback for non-secure contexts (file://) or older browsers
-  const ta = document.createElement('textarea');
-  ta.value = text;
-  ta.style.position = 'fixed';
-  ta.style.opacity = '0';
-  document.body.appendChild(ta);
-  ta.select();
-  try {
-    document.execCommand('copy');
-  } finally {
-    document.body.removeChild(ta);
-  }
-}
-
 export function seededShuffle<T>(arr: T[], rng: RNG): T[] {
   const a = arr.slice();
   let i = a.length - 1;
@@ -124,13 +90,29 @@ export function randn(rng: RNG): number {
   return z;
 }
 
-export function clamp(x: number, lo: number, hi: number): number {
-  return Math.max(lo, Math.min(hi, x));
-}
-
-export function uid(prefix = 'id'): string {
-  const r = Math.random().toString(36).slice(2, 8);
-  const t = Date.now().toString(36);
-  return prefix + '-' + t + '-' + r;
+export async function copyLinkToClipboard(): Promise<boolean> {
+  const text = window.location.href;
+  try {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    // Fallback for non-secure contexts or older browsers
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      const success = document.execCommand('copy');
+      return success;
+    } finally {
+      document.body.removeChild(ta);
+    }
+  } catch (error) {
+    console.error('Failed to copy link:', error);
+    return false;
+  }
 }
 
