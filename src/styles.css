@@ -257,25 +257,26 @@ button.icon-button {
   font-weight: 500;
 }
 
-/* Ballot grid with Colorado styling */
+/* Ballot grid with Colorado styling - white background for readability */
 .ballot-grid {
-  border: 2px solid var(--border);
+  border: 2px solid var(--accent-2);
   border-top: 3px solid var(--accent-2);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 12px;
-  background: var(--bg-elevated);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.3);
 }
 .ballot-row {
   display: grid;
   grid-template-columns: minmax(180px, 1fr) repeat(4, minmax(90px, 1fr));
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e5e7eb;
 }
 .ballot-row.header {
-  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   font-weight: 600;
   border-bottom: 2px solid var(--accent-2);
+  color: #1a1a1a;
 }
 .cell {
   padding: 8px;
@@ -287,8 +288,8 @@ button.icon-button {
   flex-direction: column;
   align-items: flex-start;
 }
-.cand-name { font-weight: 600; color: var(--text); }
-.cand-bio { color: var(--muted); font-size: 0.9rem; }
+.cand-name { font-weight: 600; color: #1a1a1a; }
+.cand-bio { color: #5a5a5a; font-size: 0.9rem; }
 
 .checkbox {
   width: 100%;
@@ -472,16 +473,19 @@ button.icon-button {
   filter: brightness(1.1);
 }
 
-/* Chart and controls with Colorado theming */
+/* Chart and controls with Colorado theming - white background for clarity */
 .chart-area {
   margin-top: 16px;
-  border: 2px solid var(--border);
+  border: 2px solid var(--accent);
   border-top: 3px solid var(--accent);
   border-radius: 8px;
   padding: 12px;
   overflow-x: auto;
-  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(191, 10, 48, 0.3);
+}
+.chart-area * {
+  color: #1a1a1a;
 }
 .chart-wrapper { width: 100%; }
 .charts-row {
@@ -494,7 +498,7 @@ button.icon-button {
 .sankey-container { flex: 1 1 auto; min-width: 600px; }
 .bar-chart-container {
   flex: 0 0 auto;
-  border-left: 1px solid var(--border);
+  border-left: 1px solid #e5e7eb;
   padding-left: 20px;
 }
 .legend {
@@ -504,36 +508,37 @@ button.icon-button {
   flex-wrap: wrap;
   margin: 8px 0;
 }
-.legend-item { display: inline-flex; gap: 6px; align-items: center; font-size: 0.95rem; }
+.legend-item { display: inline-flex; gap: 6px; align-items: center; font-size: 0.95rem; color: #1a1a1a; }
 .legend-item .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,0.15); }
 .round-stats {
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed #e5e7eb;
   margin-top: 8px;
   padding-top: 8px;
 }
-.round-stats-header { font-weight: 600; margin-bottom: 4px; }
-.round-stats-meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 4px; }
-.round-stats-list { margin: 0; padding-left: 18px; }
+.round-stats-header { font-weight: 600; margin-bottom: 4px; color: #1a1a1a; }
+.round-stats-meta { color: #5a5a5a; font-size: 0.95rem; margin-bottom: 4px; }
+.round-stats-list { margin: 0; padding-left: 18px; color: #1a1a1a; }
 
 /* Exhaustion Analysis */
 .exhaustion-analysis {
-  border-top: 1px dashed var(--border);
+  border-top: 1px dashed #e5e7eb;
   margin-top: 12px;
   padding-top: 12px;
 }
-.exhaustion-header { font-weight: 600; margin-bottom: 8px; }
-.exhaustion-none { color: var(--muted); font-size: 0.95rem; }
+.exhaustion-header { font-weight: 600; margin-bottom: 8px; color: #1a1a1a; }
+.exhaustion-none { color: #5a5a5a; font-size: 0.95rem; }
 .exhaustion-summary {
-  background: var(--bg-card);
+  background: #f8f9fa;
   padding: 10px 14px;
   border-radius: 6px;
   border-left: 3px solid var(--accent);
   margin-bottom: 12px;
   font-size: 0.95rem;
+  color: #1a1a1a;
   box-shadow: 0 2px 8px rgba(191, 10, 48, 0.2);
 }
 .exhaustion-breakdown { margin-top: 12px; }
-.breakdown-title { font-weight: 500; margin-bottom: 8px; font-size: 0.95rem; }
+.breakdown-title { font-weight: 500; margin-bottom: 8px; font-size: 0.95rem; color: #1a1a1a; }
 .exhaustion-reason {
   margin-bottom: 12px;
   position: relative;
@@ -550,18 +555,18 @@ button.icon-button {
   margin-top: 4px;
   font-size: 0.9rem;
 }
-.reason-text { color: var(--text); }
-.reason-count { color: var(--muted); font-weight: 500; }
+.reason-text { color: #1a1a1a; }
+.reason-count { color: #5a5a5a; font-weight: 500; }
 .round-controls {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   margin: 8px 0;
 }
-.chart-note { color: var(--muted); font-size: 0.9rem; margin: 4px 0 8px 0; }
+.chart-note { color: #5a5a5a; font-size: 0.9rem; margin: 4px 0 8px 0; }
 .tie-info {
   margin-top: 8px;
-  color: var(--muted);
+  color: #5a5a5a;
   font-size: 0.95rem;
 }
 
@@ -603,7 +608,7 @@ button.icon-button {
   }
   .bar-chart-container {
     border-left: none;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid #e5e7eb;
     padding-left: 0;
     padding-top: 16px;
     width: 100%;
