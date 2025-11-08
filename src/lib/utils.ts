@@ -90,3 +90,29 @@ export function randn(rng: RNG): number {
   return z;
 }
 
+export async function copyLinkToClipboard(): Promise<boolean> {
+  const text = window.location.href;
+  try {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    // Fallback for non-secure contexts or older browsers
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      const success = document.execCommand('copy');
+      return success;
+    } finally {
+      document.body.removeChild(ta);
+    }
+  } catch (error) {
+    console.error('Failed to copy link:', error);
+    return false;
+  }
+}
+

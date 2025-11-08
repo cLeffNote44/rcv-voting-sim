@@ -8,6 +8,7 @@ import { runRCV } from '../lib/rcv';
 import { renderRoundControls } from '../components/RoundControls';
 import { renderBallotSummary } from '../components/BallotSummary';
 import { renderRulesModal } from '../components/RulesModal';
+import { renderToolbar } from '../components/Toolbar';
 
 export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
   root.innerHTML = '';
@@ -17,12 +18,13 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
   const pos = generatePositions(selected, seed);
 
   const ballotArea = document.createElement('div');
+  const toolbarArea = document.createElement('div');
   const controlsArea = document.createElement('div');
   const chartArea = document.createElement('div');
   chartArea.className = 'chart-area';
   const summaryArea = document.createElement('div');
 
-  root.append(ballotArea, controlsArea, chartArea, summaryArea);
+  root.append(ballotArea, toolbarArea, controlsArea, chartArea, summaryArea);
 
   renderBallot(ballotArea, selected, (userBallot: Ballot) => {
     try {
@@ -30,6 +32,9 @@ export function renderSim(root: HTMLElement, rerenderRoute: () => void): void {
       const ballots = synth.concat([userBallot]);
       const candidateIds = selected.map(c => c.id);
       const result = runRCV(ballots, candidateIds, seed, userBallot.id);
+
+      // Render toolbar with share, export, and theme controls
+      renderToolbar(toolbarArea, result, selected, seed, n);
 
       const api: RCVisAPI = renderRCVisChart(chartArea, result, selected, result.userPath);
       renderBallotSummary(summaryArea, result, selected, result.userPath);

@@ -11,6 +11,9 @@ An interactive **Ranked Choice Voting (RCV)** simulator with real-time visualiza
 - 🔄 **Round-by-Round Tracking** - Step through each elimination round to understand the process
 - 👤 **Personal Ballot Journey** - See how your specific ballot transfers between candidates
 - 🎲 **Deterministic Simulations** - Shareable URLs with seed parameters for reproducible results
+- 🔗 **One-Click Sharing** - Share simulation results with a single click via URL
+- 📥 **Export Results** - Download simulation data as CSV or JSON for analysis
+- 🎨 **Accessibility Themes** - Choose from default, colorblind-friendly, or high-contrast color schemes
 - 📱 **Mobile Responsive** - Works seamlessly on desktop, tablet, and mobile devices
 - 🎓 **Educational Focus** - Built-in explanations of RCV rules and tie-breaking procedures
 - ⚡ **Client-Side Only** - No backend required, runs entirely in your browser
@@ -68,6 +71,17 @@ The simulator implements Fort Collins instant-runoff voting rules:
 - **Bar Charts**: Round-by-round tallies with majority threshold
 - **Exhaustion Analysis**: Breakdown of exhausted ballots (overvotes, no valid next choice, blanks)
 - **Your Ballot Path**: Highlights your ballot's journey through the count
+
+### 5. Share & Export
+- **Share Link**: Copy the simulation URL to share exact results with others
+- **CSV Export**: Download round-by-round tallies and exhaustion data for spreadsheet analysis
+- **JSON Export**: Full simulation data including candidates, metadata, and all round details
+
+### 6. Accessibility
+Three color schemes available:
+- **Default**: Standard color palette
+- **Colorblind-Friendly**: Deuteranopia/protanopia safe colors
+- **High Contrast**: WCAG AAA compliant for maximum readability
 
 ## Technology Stack
 
