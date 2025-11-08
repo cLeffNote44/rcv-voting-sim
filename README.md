@@ -2,7 +2,10 @@
 
 <div align="center">
 
-**Interactive Ranked Choice Voting simulator with real-time visualizations and educational features**
+**WTH is Rank Choice Voting? Well, when Fort Collins, Colorado voted it through we had no idea what it was, but SURE, WHY NOT?!**
+**Well here's your guide. And sorry to break it to you, RCV is awful. I mean, AWFUL; Good Luck!!**
+
+email me about your experence! cLeffNote44@pm.me
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)](https://www.typescriptlang.org/)
@@ -269,7 +272,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 Found a bug or have a feature request? Please [open an issue](https://github.com/yourusername/rcv-voting-sim/issues).
-
----
-
-Built with ❤️ for democracy and civic engagement.
