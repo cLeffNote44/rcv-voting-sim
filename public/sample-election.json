@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "name": "Sample City Council Election 2024",
+    "description": "A sample RCV election dataset for testing the import feature",
+    "date": "2024-11-05",
+    "jurisdiction": "Sample City"
+  },
+  "candidates": [
+    {
+      "id": "smith",
+      "name": "Jane Smith",
+      "shortLabel": "Smith",
+      "bio": "Former city planner with 15 years of experience in urban development."
+    },
+    {
+      "id": "johnson",
+      "name": "Robert Johnson",
+      "shortLabel": "Johnson",
+      "bio": "Local business owner and community organizer focused on economic growth."
+    },
+    {
+      "id": "williams",
+      "name": "Maria Williams",
+      "shortLabel": "Williams",
+      "bio": "Environmental scientist advocating for sustainable city policies."
+    },
+    {
+      "id": "brown",
+      "name": "David Brown",
+      "shortLabel": "Brown",
+      "bio": "Retired teacher passionate about education and youth programs."
+    }
+  ],
+  "ballots": [
+    { "id": "b001", "ranks": ["smith", "williams", "johnson", "brown"], "source": "synthetic" },
+    { "id": "b002", "ranks": ["smith", "williams", "brown", null], "source": "synthetic" },
+    { "id": "b003", "ranks": ["smith", "johnson", null, null], "source": "synthetic" },
+    { "id": "b004", "ranks": ["smith", null, null, null], "source": "synthetic" },
+    { "id": "b005", "ranks": ["smith", "williams", "johnson", "brown"], "source": "synthetic" },
+    { "id": "b006", "ranks": ["johnson", "smith", "williams", "brown"], "source": "synthetic" },
+    { "id": "b007", "ranks": ["johnson", "brown", "smith", null], "source": "synthetic" },
+    { "id": "b008", "ranks": ["johnson", "smith", null, null], "source": "synthetic" },
+    { "id": "b009", "ranks": ["johnson", null, null, null], "source": "synthetic" },
+    { "id": "b010", "ranks": ["johnson", "williams", "brown", "smith"], "source": "synthetic" },
+    { "id": "b011", "ranks": ["williams", "smith", "johnson", "brown"], "source": "synthetic" },
+    { "id": "b012", "ranks": ["williams", "smith", "brown", null], "source": "synthetic" },
+    { "id": "b013", "ranks": ["williams", "johnson", "smith", null], "source": "synthetic" },
+    { "id": "b014", "ranks": ["williams", "brown", null, null], "source": "synthetic" },
+    { "id": "b015", "ranks": ["williams", "smith", "johnson", "brown"], "source": "synthetic" },
+    { "id": "b016", "ranks": ["brown", "williams", "smith", "johnson"], "source": "synthetic" },
+    { "id": "b017", "ranks": ["brown", "smith", null, null], "source": "synthetic" },
+    { "id": "b018", "ranks": ["brown", "johnson", "williams", null], "source": "synthetic" },
+    { "id": "b019", "ranks": ["brown", null, null, null], "source": "synthetic" },
+    { "id": "b020", "ranks": ["brown", "williams", "johnson", "smith"], "source": "synthetic" },
+    { "id": "b021", "ranks": ["smith", "williams", "johnson", "brown"], "source": "synthetic" },
+    { "id": "b022", "ranks": ["smith", "brown", "williams", null], "source": "synthetic" },
+    { "id": "b023", "ranks": ["johnson", "williams", "smith", "brown"], "source": "synthetic" },
+    { "id": "b024", "ranks": ["williams", "johnson", "brown", "smith"], "source": "synthetic" },
+    { "id": "b025", "ranks": ["smith", "johnson", "williams", "brown"], "source": "synthetic" }
+  ]
+}

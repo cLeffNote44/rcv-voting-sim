@@ -1,0 +1,77 @@
+/* Colorado-themed dark mode styling using state flag colors */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&display=swap');
+
+:root {
+  /* Colorado Flag Colors - Dark Theme */
+  --colorado-blue: #002868;      /* Deep royal blue from flag */
+  --colorado-red: #BF0A30;       /* Crimson red from flag */
+  --colorado-gold: #FFD700;      /* Gold from the "C" */
+  --colorado-white: #FFFFFF;
+
+  /* Dark theme palette */
+  --text: #e8edf4;
+  --bg: #0a1929;                 /* Dark blue-black background */
+  --bg-elevated: #132f4c;        /* Lighter blue for cards */
+  --bg-card: #1a3a52;            /* Even lighter for interactive cards */
+  --border: #1e4976;             /* Subtle blue border */
+  --accent: var(--colorado-red);     /* Red accent */
+  --accent-2: var(--colorado-gold);  /* Gold accent */
+}
+
+body {
+  font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1, h2 {
+  letter-spacing: -0.2px;
+  background: linear-gradient(135deg, var(--colorado-gold) 0%, var(--colorado-red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+h1 { font-weight: 700; }
+
+/* Buttons with Colorado flair */
+button {
+  border-radius: 8px;
+  padding: 10px 16px;
+  transition: all 0.2s ease;
+}
+button.primary {
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--colorado-red) 0%, #8B0A1E 100%);
+  border-color: var(--colorado-red);
+  box-shadow: 0 4px 12px rgba(191, 10, 48, 0.3);
+}
+button.primary:hover {
+  box-shadow: 0 6px 16px rgba(191, 10, 48, 0.4);
+  transform: translateY(-1px);
+}
+button.outline {
+  background: transparent;
+  color: var(--colorado-gold);
+  border: 2px solid var(--colorado-gold);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+}
+button.outline:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+button.outline:focus { outline-color: var(--colorado-gold); }
+
+/* Hero with Colorado mountain gradient */
+.hero {
+  background: linear-gradient(135deg,
+    var(--colorado-blue) 0%,
+    #003d82 30%,
+    var(--colorado-red) 70%,
+    var(--colorado-gold) 100%);
+  text-align: left;
+  border: 2px solid var(--colorado-gold);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+}
+.hero-title { letter-spacing: -0.3px; }
+
+/* Container spacing */
+#app { padding: 24px; }

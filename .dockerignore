@@ -1,0 +1,36 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Development files
+.git
+.gitignore
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+coverage
+*.test.ts
+tests/
+
+# Documentation (not needed in container)
+*.md
+!README.md
+
+# Docker files (prevent recursive copy)
+Dockerfile
+docker-compose.yml
+.dockerignore
